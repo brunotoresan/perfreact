@@ -1,18 +1,19 @@
-import { useMemo } from "react"
 import { ProductItem } from "./ProductItem"
 
 interface ProductProps {
   id: number
   price: number
+  priceFormatted: string
   title: string
 }
 
 interface SearchResultsProps {
   results: Array<ProductProps>
+  totalPrice: number
   onAddToWishList: (id: number) => void
 }
 
-export function SearchResults({ results, onAddToWishList }: SearchResultsProps) {
+export function SearchResults({ results, totalPrice, onAddToWishList }: SearchResultsProps) {
 
   /* Utilizao o useMemo/useCallback em:
     1. Cálculos pesados
@@ -21,12 +22,6 @@ export function SearchResults({ results, onAddToWishList }: SearchResultsProps) 
     useMemo memoiza um valor,
     useCallback memoiza uma função
   */
-
-  const totalPrice = useMemo(() => {
-    return results.reduce((total, product) => {
-      return total + product.price;
-    }, 0)
-  }, [results])
 
   return (
     <div>
