@@ -48,16 +48,6 @@ export function SearchResults({ results, totalPrice, onAddToWishList }: SearchRe
         rowCount={results.length}
         rowRenderer={rowRenderer}
       />
-
-      {/* {results.map(product => {
-        return (
-          <ProductItem
-            key={product.id}
-            product={product}
-            onAddToWishList={onAddToWishList} 
-          />
-        )
-      })} */}
     </div>
   )
 }
