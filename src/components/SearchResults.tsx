@@ -1,3 +1,5 @@
+import { List, ListRowRenderer } from 'react-virtualized'
+
 import { ProductItem } from "./ProductItem"
 
 interface ProductProps {
@@ -23,11 +25,31 @@ export function SearchResults({ results, totalPrice, onAddToWishList }: SearchRe
     useCallback memoiza uma função
   */
 
+  const rowRenderer: ListRowRenderer = ({index, key, style}) => {
+    return (
+      <div key={key} style={style}>
+        <ProductItem
+          product={results[index]}
+          onAddToWishList={onAddToWishList} 
+        />
+      </div>
+    )
+  }
+
   return (
     <div>
       <h2>Preço total = {totalPrice}</h2>
 
-      {results.map(product => {
+      <List
+        height={300}
+        rowHeight={30}
+        width={900}
+        overscanRowCount={5}
+        rowCount={results.length}
+        rowRenderer={rowRenderer}
+      />
+
+      {/* {results.map(product => {
         return (
           <ProductItem
             key={product.id}
@@ -35,7 +57,7 @@ export function SearchResults({ results, totalPrice, onAddToWishList }: SearchRe
             onAddToWishList={onAddToWishList} 
           />
         )
-      })}
+      })} */}
     </div>
   )
 }
